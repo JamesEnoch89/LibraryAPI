@@ -213,12 +213,30 @@
     <Compile Include="Migrations\201804191942148_UpdatedDb.Designer.cs">
       <DependentUpon>201804191942148_UpdatedDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804230300146_FinishedBookAuthorSearch.cs" />
+    <Compile Include="Migrations\201804230300146_FinishedBookAuthorSearch.Designer.cs">
+      <DependentUpon>201804230300146_FinishedBookAuthorSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804230315514_AddedSearchingInLibrary.cs" />
+    <Compile Include="Migrations\201804230315514_AddedSearchingInLibrary.Designer.cs">
+      <DependentUpon>201804230315514_AddedSearchingInLibrary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804230325035_AllowedNullsDueBack.cs" />
+    <Compile Include="Migrations\201804230325035_AllowedNullsDueBack.Designer.cs">
+      <DependentUpon>201804230325035_AllowedNullsDueBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804230333401_AddedMoreBooksForLibrarySearch.cs" />
+    <Compile Include="Migrations\201804230333401_AddedMoreBooksForLibrarySearch.Designer.cs">
+      <DependentUpon>201804230333401_AddedMoreBooksForLibrarySearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\CheckOutLedger.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BookSearch.cs" />
+    <Compile Include="ViewModels\PostBook.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -303,6 +321,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804191942148_UpdatedDb.resx">
       <DependentUpon>201804191942148_UpdatedDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804230300146_FinishedBookAuthorSearch.resx">
+      <DependentUpon>201804230300146_FinishedBookAuthorSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804230315514_AddedSearchingInLibrary.resx">
+      <DependentUpon>201804230315514_AddedSearchingInLibrary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804230325035_AllowedNullsDueBack.resx">
+      <DependentUpon>201804230325035_AllowedNullsDueBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804230333401_AddedMoreBooksForLibrarySearch.resx">
+      <DependentUpon>201804230333401_AddedMoreBooksForLibrarySearch.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

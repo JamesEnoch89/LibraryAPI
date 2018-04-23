@@ -21,10 +21,12 @@ namespace LibraryAPI.Models
 //IHttpRequest
 //    [Attribute]
 //    is book checked out?
-//    if it is give error message:
+//    if it is give error message: {        } URI?? (string email) int BookID 
 //    {
 //        - declare vars 
 //        - who = email.id
 //        - timestamp = timestamp.now?
 //        - will be returned in timestamp.now + 10 days
+
+// then allow user to check out?
 //    }
