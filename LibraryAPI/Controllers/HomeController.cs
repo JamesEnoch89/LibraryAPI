@@ -14,5 +14,11 @@ namespace LibraryAPI.Controllers
 
             return View();
         }
+
+        public ActionResult Books()
+        {
+            ViewBag.Title = "Books";
+            return View();
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace LibraryAPI.ViewModels
     //use view model to pull in author and genre names 
     // bind them to new book post
 {
-    public class BookPost
+    public class BookViewModel
     {
         public int ID { get; set; }
         public string Title { get; set; }

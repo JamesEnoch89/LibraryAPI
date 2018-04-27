@@ -13,39 +13,45 @@ namespace LibraryAPI.Controllers
 {
     public class SearchController : ApiController
     {
-        [HttpGet]
-        public IEnumerable<Book> Search([FromUri]BookSearch book)
+        public IHttpActionResult Get([FromUri]BookSearch data)
         {
             // search for book by title, author, or genre.
             // bind author and genre params to book search
             // fromuri = force web api to read complex data type (object)
             var db = new LibraryContext();
-            var bookSearch = db.Books.Include(i => i.Author).Include(i => i.Genre);
+            var bookQuery = db.Books.Include(i => i.Author).Include(i => i.Genre);
             // if string has any params from BookSearch class, return them.
-            if (!String.IsNullOrEmpty(book.Title))
+            if (!String.IsNullOrEmpty(data.Title))
             {
-                bookSearch = bookSearch.Where(w => w.Title == book.Title);
+                bookQuery = bookQuery.Where(w => w.Title.Contains(data.Title));
             }
 
-            if (book.Author != null)
+            if (!String.IsNullOrEmpty(data.Author))
             {
-                bookSearch = bookSearch.Where(w => w.Author.Name == book.Author);
+                bookQuery = bookQuery.Where(w => w.Author.Name.Contains(data.Author));
             }
-            if (book.Genre != null)
+            if (!String.IsNullOrEmpty(data.Genre))
             {
-                bookSearch = bookSearch.Where(w => w.Genre.Name == book.Genre);
+                bookQuery = bookQuery.Where(w => w.Genre.Name.Contains(data.Genre));
             }
-            return bookSearch;
+            var results = bookQuery.ToList();
+            if (results.Count == 0)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(results);
+            }
         }
-
-        [HttpGet]
-        public IEnumerable<Book> SearchLibrary()
-        // reuse search to display available books
-        {
-            var db = new LibraryContext();
-            var librarySearch = db.Books.Include(i => i.Author).Include(i => i.Genre);
-            var rv = librarySearch.Where(book => book.IsCheckedOut == false);
-            return rv.ToList();
-        }
+        //[HttpGet]
+        //public IEnumerable<Book> SearchLibrary()
+        //// reuse search to display available books
+        //{
+        //    var db = new LibraryContext();
+        //    var librarySearch = db.Books.Include(i => i.Author).Include(i => i.Genre);
+        //    var rv = librarySearch.Where(book => book.IsCheckedOut == false);
+        //    return rv.ToList();
+        //}
     }
 }

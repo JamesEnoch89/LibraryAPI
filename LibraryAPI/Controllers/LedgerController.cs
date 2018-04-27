@@ -9,6 +9,5 @@ namespace LibraryAPI.Controllers
 {
     public class LedgerController : ApiController
     {
-
     }
 }

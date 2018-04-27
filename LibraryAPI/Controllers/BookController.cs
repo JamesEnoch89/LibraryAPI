@@ -7,27 +7,42 @@ using System.Web.Http;
 using LibraryAPI.Data;
 using LibraryAPI.Models;
 using LibraryAPI.ViewModels;
+using System.Data.Entity;
 
 namespace LibraryAPI.Controllers
 {
     public class BookController : ApiController
     {
-
-        public IEnumerable<Book> GetAllBooks()
+        [Route("api/books")]
+        [HttpGet]
+        public IEnumerable<BookViewModel> GetAllBooks()
         {
             var db = new LibraryContext();
-            return db.Books.ToList();
+            var data = db.Books
+                .Include(i => i.Author)
+                .Include(i => i.Genre)
+                .ToList();
+
+            var rv = data.Select(book => new BookViewModel
+            {
+                Title = book.Title,
+                AuthorName = book.Author.Name,
+                GenreName = book.Genre.Name,
+                YearPublished = book.YearPublished
+            });
+            return rv;
         }
+
 
         // post new book
         // not pulling in author name or genre name?
         // save issue as friday
-        public IHttpActionResult Post(BookPost book)
+        public IHttpActionResult Post(BookViewModel book)
         {
-            var dbBook = new LibraryContext();
+            var db = new LibraryContext();
 
-            Author author = dbBook.Authors.First(f => f.Name == book.AuthorName);
-            Genre genre = dbBook.Genres.First(f => f.Name == book.GenreName);
+            Author author = db.Authors.First(f => f.Name == book.AuthorName);
+            Genre genre = db.Genres.First(f => f.Name == book.GenreName);
 
             var newBook = new Book
             {
@@ -39,8 +54,8 @@ namespace LibraryAPI.Controllers
                 IsCheckedOut = book.IsCheckedOut,
             };
 
-            dbBook.Books.Add(newBook);
-            dbBook.SaveChanges();
+            db.Books.Add(newBook);
+            db.SaveChanges();
             newBook.Author = author;
             newBook.Genre = genre;
             return Ok(newBook);
